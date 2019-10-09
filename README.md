@@ -26,6 +26,8 @@ Collaborators:
             - Regression
         - Ensemle Learning (Introduction)
 
+- SVM contains Theory about basic concept of Support Vector Machines as of 10/10/19.
+
 - Machine_Learning_Theory Contains Statistical Theory(In depth) about machine learning
 
 - Data Visualisation Contains introductory practical insights on plotting with Seaborn.(Reference Kaggle MicroCourse on Data Visualisation)
