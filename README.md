@@ -30,7 +30,7 @@ Collaborators:
 
 - [Machine_Learning_Theory](src/Machine_Learning_Theory.ipynb) Contains Statistical Theory(In depth) about machine learning
 
-- [Data Visualisation](src/Data\ Visualisation.ipynb) Contains introductory practical insights on plotting with Seaborn.(Reference Kaggle MicroCourse on Data Visualisation)
+- [Data Visualisation](src/Data_Visualisation.ipynb) Contains introductory practical insights on plotting with Seaborn.(Reference Kaggle MicroCourse on Data Visualisation)
 
 - [S1Regresssion](src/S1Regresssion.ipynb) is an example of how to apply linear regression to a dataset. The analysis dangerously incomplete as of now (10/10/19).
 
