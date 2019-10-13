@@ -36,6 +36,8 @@ Collaborators:
 
 - [tf_introduction](src/tf_introduction.ipynb) is guide to basic operations of tensorflow.
 
+- [Essental Statistics and Probability](src/stats_and_prob.ipynb) is the guide to essentials of statistics and probability required for data science and engineering.
+
 ---
 
 *Please use the __[commit.sh](commit.sh)__ file to commit the changes and then push to the remote to maintain a common format of commit messages*
