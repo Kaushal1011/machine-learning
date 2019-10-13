@@ -13,7 +13,7 @@ Collaborators:
 
 ## Information about Source
 
-- MasterNotebook Contains Practical Approaches to Simple Machine Learning Algorithms with minimal theory to give insights.
+- [Master Notebook](src/MasterNotebook.ipynb) Contains Practical Approaches to Simple Machine Learning Algorithms with minimal theory to give insights.
     - Contents
         - Linear Regression(Good Enough)
             - Normal Equation
@@ -26,14 +26,16 @@ Collaborators:
             - Regression
         - Ensemle Learning (Introduction)
 
-- SVM contains Theory about basic concept of Support Vector Machines as of 10/10/19.
+- [SVM](src/SVM.ipynb) contains Theory about basic concept of Support Vector Machines as of 10/10/19.
 
-- Machine_Learning_Theory Contains Statistical Theory(In depth) about machine learning
+- [Machine_Learning_Theory](src/Machine_Learning_Theory.ipynb) Contains Statistical Theory(In depth) about machine learning
 
-- Data Visualisation Contains introductory practical insights on plotting with Seaborn.(Reference Kaggle MicroCourse on Data Visualisation)
+- [Data Visualisation](src/Data\ Visualisation.ipynb) Contains introductory practical insights on plotting with Seaborn.(Reference Kaggle MicroCourse on Data Visualisation)
 
-- S1Regresssion is an example of how to apply linear regression to a dataset. The analysis dangerously incomplete as of now (10/10/19).
+- [S1Regresssion](src/S1Regresssion.ipynb) is an example of how to apply linear regression to a dataset. The analysis dangerously incomplete as of now (10/10/19).
 
-- tf_intoduction is guide to basic operations of tensorflow.
+- [tf_introduction](src/tf_introduction.ipynb) is guide to basic operations of tensorflow.
 
-            
+---
+
+*Please use the __[commit.sh](commit.sh)__ file to commit the changes and then push to the remote to maintain a common format of commit messages*
