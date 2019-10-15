@@ -28,7 +28,7 @@ Collaborators:
 
 - [SVM](src/SVM.ipynb) contains Theory about basic concept of Support Vector Machines as of 10/10/19.
 
-- [Machine_Learning_Theory](src/Machine_Learning_Theory.ipynb) Contains Statistical Theory(In depth) about machine learning
+- [Introduction](src/theory/00_Introduction.ipynb) Contains Statistical Theory(In depth) about machine learning
 
 - [Data Visualisation](src/Data_Visualisation.ipynb) Contains introductory practical insights on plotting with Seaborn.(Reference Kaggle MicroCourse on Data Visualisation)
 
