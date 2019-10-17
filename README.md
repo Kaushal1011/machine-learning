@@ -28,7 +28,11 @@ Collaborators:
 
 - [SVM](src/SVM.ipynb) contains Theory about basic concept of Support Vector Machines as of 10/10/19.
 
-- [Introduction](src/theory/00_Introduction.ipynb) Contains Statistical Theory(In depth) about machine learning
+- [theory](src/theory) folder constains theory about Machine Learning
+
+    - [Introduction](src/theory/00_Introduction.ipynb) contains Statistical Theory(In depth) about machine learning
+    
+    - [Regression](src/theory/01_Regression.ipynb) constains theory about simple and multiple linear regression
 
 - [Data Visualisation](src/Data_Visualisation.ipynb) Contains introductory practical insights on plotting with Seaborn.(Reference Kaggle MicroCourse on Data Visualisation)
 
@@ -41,3 +45,5 @@ Collaborators:
 ---
 
 *Please use the __[commit.sh](commit.sh)__ file to commit the changes and then push to the remote to maintain a common format of commit messages*
+
+*__[conda.sh](conda.sh)__ file sets up the environment required to run the codes*

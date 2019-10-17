@@ -105,6 +105,9 @@ venv.bak/
 # mypy
 .mypy_cache/
 
+# VSCode folders
+.vscode/
+
 # ----------------------------
 
 # R
