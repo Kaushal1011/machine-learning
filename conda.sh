@@ -11,7 +11,7 @@ if [ -x "$(command -v conda)" ]; then
                      pylint \
                      R \
                      requests \
-		             seaborn \
+                     seaborn \
                      scikit-learn \
                      scipy \
                      sympy \
