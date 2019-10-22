@@ -31,18 +31,19 @@ Collaborators:
 - [theory](src/theory) folder constains theory about Machine Learning
 
     - [Introduction](src/theory/00_Introduction.ipynb) contains Statistical Theory(In depth) about machine learning
-    
+
     - [Regression](src/theory/01_Regression.ipynb) constains theory about simple and multiple linear regression
 
-- [Data Visualisation](src/Data_Visualisation.ipynb) Contains introductory practical insights on plotting with Seaborn.(Reference Kaggle MicroCourse on Data Visualisation)
+- [Data Visualisation](src/analytics/Data_Visualisation.ipynb) Contains introductory practical insights on plotting with Seaborn.(Reference Kaggle MicroCourse on Data Visualisation)
 
-- [S1Regresssion](src/S1Regresssion.ipynb) is an example of how to apply linear regression to a dataset. The analysis dangerously incomplete as of now (10/10/19).
+- [S1Regresssion](src/research/S1Regresssion.ipynb) is an example of how to apply linear regression to a dataset. The analysis dangerously incomplete as of now (10/10/19).
 
-- [tf_introduction](src/tf_introduction.ipynb) is guide to basic operations of tensorflow.
+- [tf_introduction](src/research/tf_introduction.ipynb) is guide to basic operations of tensorflow.
 
 - [Essental Statistics and Probability](src/stats_and_prob.ipynb) is the guide to essentials of statistics and probability required for data science and engineering.
 
 ---
+*Please use the rendered HTML file directly from the __[bin/](bin/)__ folder if to avoid any malfunctioning.*
 
 *Please use the __[commit.sh](commit.sh)__ file to commit the changes and then push to the remote to maintain a common format of commit messages*
 
