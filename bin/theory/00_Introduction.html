@@ -13268,7 +13268,7 @@ model may be a good choice since it will be quite easy to understand
 the relationship between $Y$ and $X_{1}, X_{2}, \cdots, X_{p}$.</p>
 <p>We have established that when inference is the goal, there are clear advantages to using simple and relatively inflexible statistical learning methods. In some settings, however, we are only interested in prediction, and the interpretability of the predictive model is simply not of interest. For instance, if we seek to develop an algorithm to predict the price of a stock, our sole requirement for the algorithm is that it predict accurately, interpretability is not a concern. In this setting, we might expect that it will be best to use the most flexible model available.</p>
 <p><em>In general, as the flexibility of a method increases, its interpretability decreases.</em></p>
-<p><img src="../../src/img/tradeoff.png" alt=""></p>
+<p><img src="../img/tradeoff.png" alt=""></p>
 
 </div>
 </div>
@@ -13351,7 +13351,7 @@ where $I\left(y_{i} \neq \hat{y}_{i}\right)$ is the indicator variable which equ
 <li>squared bias of $\hat{f}(x_{0})$</li>
 <li>variance of error terms $\epsilon$</li>
 </ul>
-$$E\left(y_{0} - \hat{f}\left(x_{0}\right)\right)^{2} = Var\left(\hat{f}\left(x_{0}\right)\right) + \left[Bias\left(\hat{f}\left(x_{0}\right)\right)\right] + Var\left(\epsilon\right)$$<p>Here, $E\left(y_{0} - \hat{f}\left(x_{0}\right)\right)^{2}$ defines the <em>expected test MSE</em>.</p>
+$$E\left(y_{0} - \hat{f}\left(x_{0}\right)\right)^{2} = Var\left(\hat{f}\left(x_{0}\right)\right) + \left[Bias\left(\hat{f}\left(x_{0}\right)\right)\right]^{2} + Var\left(\epsilon\right)$$<p>Here, $E\left(y_{0} - \hat{f}\left(x_{0}\right)\right)^{2}$ defines the <em>expected test MSE</em>.</p>
 <p>We need to minimize the expected test error or the reducible error by achieving a <em>low variance</em> and <em>low bias</em>. Since, both variance and squared bias are non-negative quantities, the expected test MSE can never lie below $Var\left(\epsilon\right)$ which is the irreducible.</p>
 <p><em>Variance</em> refers to the amount of by which $\hat{f}$ would change if we estimated it using a different training dataset. <em>Bias</em> refers to the error that is introduced by approximating a real-life problem, which may be extremely complicated, by a much simpler model. For example, linear regression assumes that there is a linear relationship between $Y$ and $X_{1}, X_{2}, \cdots, X_{p}$. It is unlikely that any real-life problem truly has such a simple linear relationship, and so performing linear regression will undoubtedly result in some bias in the estimate of $f$. Generally, more flexible methods have high variance and low bias while less flexible methods will have a low variance and high bias.</p>
 
