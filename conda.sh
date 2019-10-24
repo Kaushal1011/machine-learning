@@ -16,6 +16,7 @@ if [ -x "$(command -v conda)" ]; then
                      scipy \
                      sympy \
                      tensorflow-gpu \
+                     xarray \
                      yapf
     conda update --all -y
 else
