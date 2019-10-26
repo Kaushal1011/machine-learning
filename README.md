@@ -14,7 +14,7 @@ Collaborators:
 ## Information about Source
 
 - [Practical Introduction](src/Practical_Introduction_00.ipynb) Contains basic information about approaches to make machine learning models.
-- [Master Notebook](src/Training_Models_01.ipynb) Contains Practical Approaches to Following Training Models
+- [Training_Models_01](src/Training_Models_01.ipynb) Contains Practical Approaches to Following Training Models
     - Contents
         - Linear Regression(Good Enough)
             - Normal Equation
