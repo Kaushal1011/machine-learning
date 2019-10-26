@@ -27,9 +27,7 @@ Collaborators:
             - Regression
         - Ensemle Learning (Introduction)
 
-- [Training Models 2](src/Training_Models_02.ipynb) Contains practical approaches to following Training Models
-    - Contents
-        - 
+- [Training Models 2](src/Training_Models_02.ipynb) Contains practical approaches to following Training Models 
 - [Dimensionality Reduction](src/Dimensionality_Redcution_03.ipynb) Contains Approaches to reduce dimension of data before trainging a model on it 
 
 - [theory](src/theory) folder constains theory about Machine Learning
