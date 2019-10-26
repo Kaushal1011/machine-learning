@@ -14,7 +14,7 @@ Collaborators:
 ## Information about Source
 
 - [Practical Introduction](src/Practical_Introduction_00.ipynb) Contains basic information about approaches to make machine learning models.
-- [Training Models 1](src/Training_Models_01.ipynb) Contains Practical Approaches to Following Training Models
+- [Training Models 1](src/Training_Models_01.ipynb) Contains practical approaches to Following Training Models
     - Contents
         - Linear Regression(Good Enough)
             - Normal Equation
@@ -27,7 +27,10 @@ Collaborators:
             - Regression
         - Ensemle Learning (Introduction)
 
-- [SVM](src/SVM.ipynb) contains Theory about basic concept of Support Vector Machines as of 10/10/19.
+- [Training Models 2](src/Training_Models_02.ipynb) Contains practical approaches to following Training Models
+    - Contents
+        - 
+- [Dimensionality Reduction](src/Dimensionality_Redcution_03.ipynb) Contains Approaches to reduce dimension of data before trainging a model on it 
 
 - [theory](src/theory) folder constains theory about Machine Learning
 
