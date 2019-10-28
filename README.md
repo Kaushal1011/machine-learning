@@ -28,14 +28,14 @@ Collaborators:
 - [Ensemble Methods](src/03_Ensemble_Methods.ipynb) Contains notes and explainations on following ensemble methods:
     - Contents
         - Voting Classifier
-    - Bagging vs Pasting
-    - Random Patches and Random Subspaces
-    - Random Forests
-    - Feature Importance
-    - Boosting
-        - AdaBoost
-        - Gradient Boosting
-    - Stacking
+        - Bagging vs Pasting
+        - Random Patches and Random Subspaces
+        - Random Forests
+        - Feature Importance
+        - Boosting
+            - AdaBoost
+            - Gradient Boosting
+        - Stacking
 
 - [Dimensionality Reduction](src/04_Dimensionality_Reduction.ipynb) Contains Approaches to reduce dimension of data before trainging a model on it 
 
