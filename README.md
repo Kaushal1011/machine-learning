@@ -47,7 +47,7 @@ Collaborators:
 
 - [Data Visualisation](src/analytics/Data_Visualisation.ipynb) Contains introductory practical insights on plotting with Seaborn.(Reference Kaggle MicroCourse on Data Visualisation)
 
-- [S1Regresssion](src/research/S1Regresssion.ipynb) is an example of how to apply linear regression to a dataset. The analysis dangerously incomplete as of now (10/10/19).
+- [S1Regresssion](src/research/S1Regresssion.ipynb) is an example of how to apply linear regression to a dataset. The analysis is dangerously incomplete as of now (10/10/19).
 
 - [tf_introduction](src/research/tf_introduction.ipynb) is guide to basic operations of tensorflow.
 
