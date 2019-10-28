@@ -16,18 +16,18 @@ Collaborators:
 - [Practical Introduction](src/Practical_Introduction_00.ipynb) Contains basic information about approaches to make machine learning models.
 - [Training Models 1](src/Training_Models_01.ipynb) Contains practical approaches to Following Training Models
     - Contents
-        - Linear Regression(Good Enough)
+        - Linear Regression
             - Normal Equation
             - Gradient Descent
             - Regularized Models
-        - Logistic Regression(Minimal)
-        - SVM(To be removed and put into a seperate notebook)
+        - Logistic Regression
         - Decision Tress
             - Classification
             - Regression
-        - Ensemle Learning (Introduction)
-
-- [Training Models 2](src/Training_Models_02.ipynb) Contains practical approaches to following Training Models 
+- [Training Models 2](src/Training_Models_02.ipynb) Contains practical approaches to following Training Models
+    - Contents
+        - Ensemble Learning
+            - Voting Classifier
 - [Dimensionality Reduction](src/Dimensionality_Redcution_03.ipynb) Contains Approaches to reduce dimension of data before trainging a model on it 
 
 - [theory](src/theory) folder constains theory about Machine Learning
