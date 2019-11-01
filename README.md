@@ -58,11 +58,18 @@ Collaborators:
 
 ### src
 
-- [Practical Introduction](http://htmlpreview.github.com/)
-- [Training Models 1](http://htmlpreview.github.com/)
-- [Training Models 2](http://htmlpreview.github.com/)
-- [Ensemble Methods](http://htmlpreview.github.com/)
-- [Dimensionality Reduction](http://htmlpreview.github.com/)
+- [Practical Introduction](http://htmlpreview.github.com/https://github.com/Kaushal1011/machine-learning/blob/master/bin/src/00_Practical_Introduction.html)
+- [Training Models 1](http://htmlpreview.github.com/https://github.com/Kaushal1011/machine-learning/blob/master/bin/src/01_Training_Models.html)
+- [Training Models 2](http://htmlpreview.github.com/https://github.com/Kaushal1011/machine-learning/blob/master/bin/src/02_Training_Models.html)
+- [Ensemble Methods](http://htmlpreview.github.com/https://github.com/Kaushal1011/machine-learning/blob/master/bin/src/03_Ensemble_Methods.html)
+- [Dimensionality Reduction](http://htmlpreview.github.com/https://github.com/Kaushal1011/machine-learning/blob/master/bin/src/04_Dimensionality_Reduction.html)
+
+### theory
+
+-[Introduction](http://htmlpreview.github.com/https://github.com/Kaushal1011/machine-learning/blob/master/bin/theory/00_Introduction.html)
+
+-[Regression](http://htmlpreview.github.com/https://github.com/Kaushal1011/machine-learning/blob/master/bin/theory/01_Regression.html)
+
 
 
 ---
