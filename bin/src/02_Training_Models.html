@@ -2,7 +2,7 @@
 <html>
 <head><meta charset="utf-8" />
 
-<title>Practical_Introduction_00</title>
+<title>02_Training_Models</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -13077,80 +13077,32 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Machine-Learning">Machine Learning<a class="anchor-link" href="#Machine-Learning">&#182;</a></h1><h2 id="Types-of-learning">Types of learning<a class="anchor-link" href="#Types-of-learning">&#182;</a></h2><ul>
-<li>Whether or not they are trained with human supervision (supervised, unsupervised, semisupervised, and Reinforcement Learning)</li>
-<li>Whether or not they can learn incrementally on the fly (online versus batch learning)</li>
-<li>Whether they work by simply comparing new data points to known data points, or instead detect patterns in the training data and build a predictive model, much like scientists do (instance-based versus model-based learning)</li>
-</ul>
-
+<h1 id="Training-Models-2">Training Models 2<a class="anchor-link" href="#Training-Models-2">&#182;</a></h1>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Types-Of-Machine-Learning-Systems">Types Of Machine Learning Systems<a class="anchor-link" href="#Types-Of-Machine-Learning-Systems">&#182;</a></h1><h2 id="Supervised-VS-Unsupervised-learning">Supervised VS Unsupervised learning<a class="anchor-link" href="#Supervised-VS-Unsupervised-learning">&#182;</a></h2><h3 id="Supervised-Learning">Supervised Learning<a class="anchor-link" href="#Supervised-Learning">&#182;</a></h3><ul>
-<li><p>In supervised learning, the training data you feed to the algorithm includes the desired solutions, called labels</p>
+<h2 id="Contents">Contents<a class="anchor-link" href="#Contents">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="SVM-Support-Vector-Machines">SVM-Support Vector Machines<a class="anchor-link" href="#SVM-Support-Vector-Machines">&#182;</a></h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>“Support Vector Machine” (SVM) is a supervised machine learning algorithm which can be used for either classification or regression problems. However, it is mostly used in classification. In this algorithm, we plot each data item as a point in n-dimensional space (where n is the number of features you have) called support vectors. Then, we perform classification by finding the hyperplane that differentiates the two classes. Additionally, SVM is robust to outliers and has a feature to ignore them.</p>
+<p>SVM constructs a hyperplane in multidimensional space to separate different classes. SVM generates optimal hyperplane in an iterative manner, which is used to minimize an error. The core idea of SVM is to find a maximum marginal hyperplane(MMH) that best divides the dataset into classes.</p>
 <ul>
-<li>k-Nearest Neighbors</li>
-<li>Linear Regression</li>
-<li>Logistic Regression</li>
-<li>Support Vector Machines (SVMs)</li>
-<li><p>Decision Trees and Random Forests</p>
-</li>
-<li><p>Neural networks</p>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="Unsupervised-Learning">Unsupervised Learning<a class="anchor-link" href="#Unsupervised-Learning">&#182;</a></h3><ul>
-<li>In unsupervised learning, as you might guess, the training data is unlabeled. The system tries to learn without a teacher<ul>
-<li>Clustering<ul>
-<li>k-Means</li>
-<li>Hierarchical Cluster Analysis (HCA)</li>
-<li>Expectation Maximization</li>
-</ul>
-</li>
-<li>Visualization and dimensionality reduction<ul>
-<li>Principal Component Analysis (PCA)</li>
-<li>Kernel PCA</li>
-<li>Locally-Linear Embedding (LLE)</li>
-<li>t-distributed Stochastic Neighbor Embedding (t-SNE)</li>
-</ul>
-</li>
-<li>Association rule learning<ul>
-<li>Apriori</li>
-<li>Eclat</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="Semisupervised-Learning">Semisupervised Learning<a class="anchor-link" href="#Semisupervised-Learning">&#182;</a></h2><ul>
-<li>Some algorithms can deal with partially labeled training data, usually a lot of unla beled data and a little bit of labeled data. This is called semisupervised learning</li>
-<li>Most semisupervised learning algorithms are combinations of unsupervised and supervised algorithms. For example, deep belief networks (DBNs) are based on unsu‐ pervised components called restricted Boltzmann machines (RBMs) stacked on top of one another. RBMs are trained sequentially in an unsupervised manner, and then the whole system is fine-tuned using supervised learning techniques.</li>
-</ul>
-<h2 id="Reinforcement-Learning">Reinforcement Learning<a class="anchor-link" href="#Reinforcement-Learning">&#182;</a></h2><ul>
-<li>Reinforcement Learning is a very different beast. The learning system, called an agent in this context, can observe the environment, select and perform actions, and get rewards in return (or penalties in the form of negative rewards. It must then learn by itself what is the best strategy, called a policy, to get the most reward over time. A policy defines what action the agent should choose when it is in a given situation.</li>
-</ul>
-<h2 id="Batch-And-Online-Learning">Batch And Online Learning<a class="anchor-link" href="#Batch-And-Online-Learning">&#182;</a></h2><h3 id="Batch-Learning">Batch Learning<a class="anchor-link" href="#Batch-Learning">&#182;</a></h3><ul>
-<li>In batch learning, the system is incapable of learning incrementally: it must be trained using all the available data. This will generally take a lot of time and computing resources, so it is typically done offline. First the system is trained, and then it is launched into production and runs without learning anymore; it just applies what it has learned. This is called offline learning.</li>
-<li>If you want a batch learning system to know about new data (such as a new type of spam), you need to train a new version of the system from scratch on the full dataset (not just the new data, but also the old data), then stop the old system and replace it with the new one.</li>
-</ul>
-<h3 id="Online-Learning">Online Learning<a class="anchor-link" href="#Online-Learning">&#182;</a></h3><ul>
-<li>In online learning, you train the system incrementally by feeding it data instances sequentially, either individually or by small groups called mini-batches. Each learning step is fast and cheap, so the system can learn about new data on the fly, as it arrives</li>
-<li>Online learning is great for systems that receive data as a continuous flow (e.g., stock prices) and need to adapt to change rapidly or autonomously. It is also a good option if you have limited computing resources: once an online learning system has learned about new data instances, it does not need them anymore, so you can discard them (unless you want to be able to roll back to a previous state and “replay” the data). This can save a huge amount of space.</li>
-<li>Online learning algorithms can also be used to train systems on huge datasets that cannot fit in one machine’s main memory (this is called out-of-core learning). The algorithm loads part of the data, runs a training step on that data, and repeats the process until it has run on all of the data<ul>
-<li>This whole process is usually done offline (i.e., not on the live system), so online learning can be a confusing name. Think of it as incremental learning</li>
-</ul>
-</li>
-<li>Importance of Learning Rate in Online Learning</li>
-</ul>
-<h2 id="Instance-Based-Vs-Model-Based-Learning">Instance-Based Vs Model-Based Learning<a class="anchor-link" href="#Instance-Based-Vs-Model-Based-Learning">&#182;</a></h2><h3 id="Instance-Based-Learning">Instance-Based Learning<a class="anchor-link" href="#Instance-Based-Learning">&#182;</a></h3><ul>
-<li>the system learns the examples by heart, then generalizes to new cases using a similarity measure </li>
-</ul>
-<h3 id="Model-Based-Learning">Model-Based Learning<a class="anchor-link" href="#Model-Based-Learning">&#182;</a></h3><ul>
-<li>Another way to generalize from a set of examples is to build a model of these examples, then use that model to make predictions. This is called model-based learning</li>
+<li>ref (<a href="https://engmrk.com/module-16-support-vector-machine-2/?utm_campaign=News&amp;utm_medium=Community&amp;utm_source=DataCamp.com_">https://engmrk.com/module-16-support-vector-machine-2/?utm_campaign=News&amp;utm_medium=Community&amp;utm_source=DataCamp.com_</a>)</li>
+<li>(<a href="https://datacamp.com/community/tutorials/svm-classification-scikit-learn-python">https://datacamp.com/community/tutorials/svm-classification-scikit-learn-python</a>)</li>
 </ul>
 
 </div>
@@ -13159,18 +13111,96 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Challenges-of-Machine-Learning">Challenges of Machine Learning<a class="anchor-link" href="#Challenges-of-Machine-Learning">&#182;</a></h1><ul>
-<li>Insuffcient Quantity of Training Data</li>
-<li>Nonrepresentative Training Data</li>
-<li>Poor-Quality Data</li>
-<li>Irrelevant Features</li>
-<li>Overfitting the Training Data</li>
-<li>Underfitting the Training Data</li>
+<h3 id="Support-Vectors">Support Vectors<a class="anchor-link" href="#Support-Vectors">&#182;</a></h3><ul>
+<li>Support vectors are the data points, which are closest to the hyperplane. These points will define the separating line better by calculating margins. These points are more relevant to the construction of the classifier.</li>
 </ul>
-<p>Most Common Supervised Learning Tasks are Classification(predicting classes) And Regression(predicting Values)</p>
+<h3 id="Hyperplane">Hyperplane<a class="anchor-link" href="#Hyperplane">&#182;</a></h3><ul>
+<li>A hyperplane is a decision plane which separates between a set of objects having different class memberships.</li>
+<li>Plane which is of n-1 dimension where n is dimension of data.</li>
+</ul>
+<h3 id="Margin">Margin<a class="anchor-link" href="#Margin">&#182;</a></h3><ul>
+<li>A margin is a gap between the two lines on the closest class points. This is calculated as the perpendicular distance from the line to support vectors or closest points. If the margin is larger in between the classes, then it is considered a good margin, a smaller margin is a bad margin.</li>
+</ul>
 
 </div>
 </div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="How-does-SVM-work?">How does SVM work?<a class="anchor-link" href="#How-does-SVM-work?">&#182;</a></h2><p>The main objective is to segregate the given dataset in the best possible way. The distance between the either nearest points is known as the margin. The objective is to select a hyperplane with the maximum possible margin between support vectors in the given dataset. SVM searches for the maximum marginal hyperplane in the following steps:</p>
+<ol>
+<li><p>Generate hyperplanes which segregates the classes in the best way. Left-hand side figure showing three hyperplanes black, blue and orange. Here, the blue and orange have higher classification error, but the black is separating the two classes correctly.</p>
+</li>
+<li><p>Select the right hyperplane with the maximum segregation from the either nearest data points as shown in the right-hand side figure.</p>
+</li>
+</ol>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img src="img/svm.webp" alt="SVM1"></p>
+<p>Dealing with non-linear and inseparable planes
+Some problems can’t be solved using linear hyperplane, as shown in the figure below (left-hand side).</p>
+<p>In such situation, SVM uses a kernel trick to transform the input space to a higher dimensional space as shown on the right. The data points are plotted on the x-axis and z-axis (Z is the squared sum of both x and y: z=x^2=y^2). Now you can easily segregate these points using linear separation.</p>
+<p><img src="img/svm2.webp" alt="SVM2"></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Types-of-SVM-kernels">Types of SVM kernels<a class="anchor-link" href="#Types-of-SVM-kernels">&#182;</a></h2><ul>
+<li><p>Linear Kernel:A linear kernel can be used as normal dot product any two given observations. The product between two vectors is the sum of the multiplication of each pair of input values.</p>
+</li>
+<li><p>Polynomial Kernel:A polynomial kernel is a more generalized form of the linear kernel. The polynomial kernel can distinguish curved or nonlinear input space</p>
+</li>
+<li><p>Radial Basis Function Kernel: The Radial basis function kernel is a popular kernel function commonly used in support vector machine classification. RBF can map an input space in infinite dimensional space</p>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="SVM-Parameters">SVM Parameters<a class="anchor-link" href="#SVM-Parameters">&#182;</a></h2><ul>
+<li>C</li>
+<li><p>C is used during the training phase and says how much outliers are taken into account in calculating Support Vectors.</p>
+</li>
+<li><p>A low C makes the decision surface smooth, while a high C aims at classifying all training examples correctly by giving the model freedom to select more samples as support vectors.</p>
+</li>
+<li><p>Gamma</p>
+</li>
+<li><p>The gamma parameter defines how far the influence of a single training example reaches, with low values meaning ‘far’ and high values meaning ‘close’.</p>
+</li>
+<li><p>The gamma parameters can be seen as the inverse of the radius of influence of samples selected by the model as support vectors.</p>
+</li>
+<li><p>Kernel</p>
+</li>
+<li>This parameter has many options like, “linear”, “rbf”,”poly” and others (default value is “rbf”). ‘linear’ is used for linear hyper-plane whereas “rbf” and “poly” are used for non-linear hyper-plane.</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+
+    </div>
+</div>
+</div>
+
 </div>
     </div>
   </div>
