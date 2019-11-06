@@ -14,7 +14,7 @@ def main() -> None:
     '''Driver code'''
 
     # Reading the advertising dataset
-    adv = pd.read_csv('../datasets/Advertising.csv')
+    adv = pd.read_csv('datasets/Advertising.csv')
 
     # Dropping the first column of index
     adv.drop(columns=['Unnamed: 0'], inplace=True)
