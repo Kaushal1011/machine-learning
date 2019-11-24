@@ -1,5 +1,3 @@
-#!/usr/bin/env bash
-# Tue 08 Oct 2019 02:00:43 PM IST
 
 if [ -x "$(command -v git)" ]; then
     git add .
@@ -9,3 +7,5 @@ else
     echo "git not installed"
     exit 1
 fi
+
+
