@@ -9,7 +9,6 @@ Collaborators:
 ## Guide to AI with Python(And R)
 
 - Machine Learning
-- Deep Learning(hopefully)
 
 ## Information about Source
 
