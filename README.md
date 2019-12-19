@@ -38,6 +38,8 @@ Collaborators:
 
 - [Dimensionality Reduction](src/04_Dimensionality_Reduction.ipynb) Contains Approaches to reduce dimension of data before trainging a model on it 
 
+- [Unsupervised Learning](src/05_Unsupervised_Learning.ipynd) Contains Unsupervised Learning Algorithms
+
 - [theory](src/theory) folder constains theory about Machine Learning
 
     - [Introduction](src/theory/00_Introduction.ipynb) contains Statistical Theory(In depth) about machine learning
