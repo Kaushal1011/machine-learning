@@ -59,21 +59,21 @@ Collaborators:
 
 ### src
 
-- [Practical Introduction](https://github.com/Kaushal1011/machine-learning/blob/master/bin/src/00_Practical_Introduction.html)
-- [Training Models 1](https://github.com/Kaushal1011/machine-learning/blob/master/bin/src/01_Training_Models.html)
-- [Training Models 2](https://github.com/Kaushal1011/machine-learning/blob/master/bin/src/02_Training_Models.html)
-- [Ensemble Methods](https://github.com/Kaushal1011/machine-learning/blob/master/bin/src/03_Ensemble_Methods.html)
-- [Dimensionality Reduction](https://github.com/Kaushal1011/machine-learning/blob/master/bin/src/04_Dimensionality_Reduction.html)
+- [Practical Introduction](bin/src/00_Practical_Introduction.html)
+- [Training Models 1](bin/src/01_Training_Models.html)
+- [Training Models 2](bin/src/02_Training_Models.html)
+- [Ensemble Methods](bin/src/03_Ensemble_Methods.html)
+- [Dimensionality Reduction](bin/src/04_Dimensionality_Reduction.html)
 
 ### theory
 
--[Introduction](https://github.com/Kaushal1011/machine-learning/blob/master/bin/theory/00_Introduction.html)
+-[Introduction](bin/theory/00_Introduction.html)
 
--[Regression](https://github.com/Kaushal1011/machine-learning/blob/master/bin/theory/01_Regression.html)
+-[Regression](bin/theory/01_Regression.html)
 
 ## How to Ml
 
-- [How to Ml]("bin/X1_What2WhenML.html")
+- [How to Ml](bin/X1_What2WhenML.html)
 
 ---
 *Please use the rendered HTML file directly from the __[bin/](bin/)__ folder if to avoid any malfunctioning.*
