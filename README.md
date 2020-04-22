@@ -64,6 +64,7 @@ Collaborators:
 - [Training Models 2](http://htmlpreview.github.com/?https://github.com/Kaushal1011/machine-learning/blob/master/bin/src/02_Training_Models.html)
 - [Ensemble Methods](http://htmlpreview.github.com/?https://github.com/Kaushal1011/machine-learning/blob/master/bin/src/03_Ensemble_Methods.html)
 - [Dimensionality Reduction](http://htmlpreview.github.com/?https://github.com/Kaushal1011/machine-learning/blob/master/bin/src/04_Dimensionality_Reduction.html)
+- [Test Link for WebHost](bin/src/04_Dimensionality_Reduction.html)
 
 ### theory
 

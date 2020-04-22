@@ -13189,6 +13189,264 @@ Some problems can’t be solved using linear hyperplane, as shown in the figure 
 </div>
 </div>
 </div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Soft-Margin-Classification">Soft Margin Classification<a class="anchor-link" href="#Soft-Margin-Classification">&#182;</a></h2><p>If we strictly impose that all instances be off the street and on the right side, this is
+called hard margin classification. There are two main issues with hard margin classification.</p>
+<ul>
+<li>it only works if the data is linearly separable.</li>
+<li>it is quite sensitive to outliers.</li>
+</ul>
+<p>To avoid these issues it is preferable to use a more flexible model. The objective is to find a good balance between keeping the street as large as possible and limiting the margin violations (i.e., instances that end up in the middle of the street or even on the wrong side). This is called <strong><em>soft margin classification.</em></strong></p>
+<p><img src="img/svm3.PNG" alt="SVM-SoftMargin"></p>
+<p>In Scikit-Learn’s SVM classes, you can control this balance using the C hyperparameter: a smaller C value leads to a wider street but more margin violations.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">datasets</span>
+<span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="kn">import</span> <span class="n">Pipeline</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span>
+<span class="kn">from</span> <span class="nn">sklearn.svm</span> <span class="kn">import</span> <span class="n">LinearSVC</span>
+<span class="n">iris</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">load_iris</span><span class="p">()</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">iris</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">][:,</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)]</span> <span class="c1"># petal length, petal width</span>
+<span class="n">y</span> <span class="o">=</span> <span class="p">(</span><span class="n">iris</span><span class="p">[</span><span class="s2">&quot;target&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span> <span class="c1"># Iris-Virginica</span>
+<span class="n">svm_clf</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">((</span>
+ <span class="p">(</span><span class="s2">&quot;scaler&quot;</span><span class="p">,</span> <span class="n">StandardScaler</span><span class="p">()),</span>
+ <span class="p">(</span><span class="s2">&quot;linear_svc&quot;</span><span class="p">,</span> <span class="n">LinearSVC</span><span class="p">(</span><span class="n">C</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">loss</span><span class="o">=</span><span class="s2">&quot;hinge&quot;</span><span class="p">)),</span>
+ <span class="p">))</span>
+<span class="n">svm_clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[2]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>Pipeline(memory=None,
+         steps=[(&#39;scaler&#39;,
+                 StandardScaler(copy=True, with_mean=True, with_std=True)),
+                (&#39;linear_svc&#39;,
+                 LinearSVC(C=1, class_weight=None, dual=True,
+                           fit_intercept=True, intercept_scaling=1,
+                           loss=&#39;hinge&#39;, max_iter=1000, multi_class=&#39;ovr&#39;,
+                           penalty=&#39;l2&#39;, random_state=None, tol=0.0001,
+                           verbose=0))],
+         verbose=False)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">svm_clf</span><span class="o">.</span><span class="n">predict</span><span class="p">([[</span><span class="mf">5.5</span><span class="p">,</span> <span class="mf">1.7</span><span class="p">]])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[3]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>array([1.])</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>using SVC(kernel="linear", C=1) is also possible, but it is much slower, especially with large training sets, so it is not recommended.</li>
+<li>The SGDClassifier class, with SGDClassifier(loss="hinge",alpha=1/(m*C)). This applies regular Stochastic Gradient Descent to train a linear SVM classifier. It does not converge as fast as the LinearSVC class, but it can be useful to handle huge datasets that do not fit in memory (out-of-core training), or to handle online classification tasks.</li>
+</ul>
+<blockquote><p>The LinearSVC class regularizes the bias term, so you should center
+the training set first by subtracting its mean. This is automatic if
+you scale the data using the StandardScaler. Moreover, make sure
+you set the loss hyperparameter to "hinge", as it is not the default
+value. Finally, for better performance you should set the dual
+hyperparameter to False, unless there are more features than
+training instances</p>
+</blockquote>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Nonlinear-SVM-Classification">Nonlinear SVM Classification<a class="anchor-link" href="#Nonlinear-SVM-Classification">&#182;</a></h2><p>Although linear SVM classifiers are efficient and work surprisingly well in many
+cases, many datasets are not even close to being linearly separable. One approach to handling nonlinear datasets is to add more features, such as polynomial features.</p>
+<p>Consider the left plot in Figure it represents a simple dataset with just one feature x1. This dataset is not linearly separable, as you can see. But if you add a second feature $x_2 = (x_1)^2$, the resulting 2D dataset is perfectly linearly separable.</p>
+<p><img src="img/svm4.PNG" alt="SVM-NonLinear"></p>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">make_moons</span>
+<span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="kn">import</span> <span class="n">Pipeline</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">PolynomialFeatures</span>
+<span class="n">polynomial_svm_clf</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">((</span>
+ <span class="p">(</span><span class="s2">&quot;poly_features&quot;</span><span class="p">,</span> <span class="n">PolynomialFeatures</span><span class="p">(</span><span class="n">degree</span><span class="o">=</span><span class="mi">3</span><span class="p">)),</span>
+ <span class="p">(</span><span class="s2">&quot;scaler&quot;</span><span class="p">,</span> <span class="n">StandardScaler</span><span class="p">()),</span>
+ <span class="p">(</span><span class="s2">&quot;svm_clf&quot;</span><span class="p">,</span> <span class="n">LinearSVC</span><span class="p">(</span><span class="n">C</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">loss</span><span class="o">=</span><span class="s2">&quot;hinge&quot;</span><span class="p">))</span>
+ <span class="p">))</span>
+<span class="n">polynomial_svm_clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Polynomial-Kernel">Polynomial Kernel<a class="anchor-link" href="#Polynomial-Kernel">&#182;</a></h2><p>Adding polynomial features is simple to implement and can work great with all sorts of Machine Learning algorithms (not just SVMs), but at a low polynomial degree it cannot deal with very complex datasets, and with a high polynomial degree it creates a huge number of features, making the model too slow.
+Fortunately, when using SVMs you can apply an almost miraculous mathematical
+technique called the kernel trick (it is explained in a moment). It makes it possible to get the same result as if you added many polynomial features, even with very highdegree polynomials, without actually having to add them. So there is no combinatorial explosion of the number of features since you don’t actually add any features. This trick is implemented by the SVC class.</p>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.svm</span> <span class="kn">import</span> <span class="n">SVC</span>
+<span class="n">poly_kernel_svm_clf</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">((</span>
+ <span class="p">(</span><span class="s2">&quot;scaler&quot;</span><span class="p">,</span> <span class="n">StandardScaler</span><span class="p">()),</span>
+ <span class="p">(</span><span class="s2">&quot;svm_clf&quot;</span><span class="p">,</span> <span class="n">SVC</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s2">&quot;poly&quot;</span><span class="p">,</span> <span class="n">degree</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">coef0</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">C</span><span class="o">=</span><span class="mi">5</span><span class="p">))</span>
+ <span class="p">))</span>
+<span class="n">poly_kernel_svm_clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+</pre></div>
+<blockquote><p>A common approach to find the right hyperparameter values is to
+use grid search. It is often faster to first do a very
+coarse grid search, then a finer grid search around the best values
+found. Having a good sense of what each hyperparameter actually
+does can also help you search in the right part of the hyperparameter space.</p>
+</blockquote>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Adding-Similarity-Features">Adding Similarity Features<a class="anchor-link" href="#Adding-Similarity-Features">&#182;</a></h2><p>Another technique to tackle nonlinear problems is to add features computed using a
+similarity function that measures how much each instance resembles a particular
+landmark.</p>
+<p>let’s define the similarity function to be the Gaussian Radial Basis Function (RBF)
+with γ = 0.3</p>
+$$ Gaussian RBF $$$$\phi y(x,l)=exp(-y|x-l|^2)$$
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Gaussian-RBF-Kernel">Gaussian RBF Kernel<a class="anchor-link" href="#Gaussian-RBF-Kernel">&#182;</a></h2><p>Just like the polynomial features method, the similarity features method can be useful
+with any Machine Learning algorithm, but it may be computationally expensive to
+compute all the additional features, especially on large training sets. However, once
+again the kernel trick does its SVM magic: it makes it possible to obtain a similar
+result as if you had added many similarity features, without actually having to add
+them.</p>
+<div class="highlight"><pre><span></span><span class="n">rbf_kernel_svm_clf</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">((</span>
+ <span class="p">(</span><span class="s2">&quot;scaler&quot;</span><span class="p">,</span> <span class="n">StandardScaler</span><span class="p">()),</span>
+ <span class="p">(</span><span class="s2">&quot;svm_clf&quot;</span><span class="p">,</span> <span class="n">SVC</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s2">&quot;rbf&quot;</span><span class="p">,</span> <span class="n">gamma</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">C</span><span class="o">=</span><span class="mf">0.001</span><span class="p">))</span>
+ <span class="p">))</span>
+<span class="n">rbf_kernel_svm_clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+</pre></div>
+<p>This model is represented on the bottom left of Figure. The other plots show
+models trained with different values of hyperparameters gamma (γ) and C. Increasing
+gamma makes the bell-shape curve narrower , and as a
+result each instance’s range of influence is smaller: the decision boundary ends up being more irregular, wiggling around individual instances. Conversely, a small gamma value makes the bell-shaped curve wider, so instances have a larger range of influence, and the decision boundary ends up smoother. So γ acts like a regularization hyperparameter: if your model is overfitting, you should reduce it, and if it is underfitting, you should increase it (similar to the C hyperparameter).</p>
+<p><img src="img/svm5.PNG" alt=""></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><strong><em>IMPORTANT</em></strong></p>
+<blockquote><p>With so many kernels to choose from, how can you decide which
+one to use? As a rule of thumb, you should always try the linear
+kernel first (remember that LinearSVC is much faster than SVC(ker
+nel="linear")), especially if the training set is very large or if it
+has plenty of features. If the training set is not too large, you should
+try the Gaussian RBF kernel as well; it works well in most cases.
+Then if you have spare time and computing power, you can also
+experiment with a few other kernels using cross-validation and grid
+search, especially if there are kernels specialized for your training
+set’s data structure</p>
+</blockquote>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Computational-Complexity">Computational Complexity<a class="anchor-link" href="#Computational-Complexity">&#182;</a></h2><p><table style ="width:100%">
+    <tr>
+        <th>Class</th> 
+        <th>Time complexity</th>           <th>Out-of-core support</th> 
+        <th>Scaling required</th> <th>Kernel trick</th>
+    </tr>
+    <tr><td>LinearSVC</td><td> O(m × n)</td><td> No</td><td> Yes</td><td> No</td></tr></p>
+<tr><td>SGDClassifier</td><td> O(m × n)</td><td> Yes</td><td> Yes</td><td> No</td></tr>
+<tr><td>SVC</td><td> O(m² × n) to O(m³ × n)</td><td> No</td><td> Yes</td><td> Yes</td></tr>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="SVM-Regression">SVM Regression<a class="anchor-link" href="#SVM-Regression">&#182;</a></h2><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.svm</span> <span class="kn">import</span> <span class="n">LinearSVR</span>
+<span class="n">svm_reg</span> <span class="o">=</span> <span class="n">LinearSVR</span><span class="p">(</span><span class="n">epsilon</span><span class="o">=</span><span class="mf">1.5</span><span class="p">)</span>
+<span class="n">svm_reg</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">sklearn.svm</span> <span class="kn">import</span> <span class="n">LinearSVR</span>
+<span class="n">svm_reg</span> <span class="o">=</span> <span class="n">LinearSVR</span><span class="p">(</span><span class="n">epsilon</span><span class="o">=</span><span class="mf">1.5</span><span class="p">)</span>
+<span class="n">svm_reg</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Add-Under-The-Hood-Theory-for-SVM">Add Under The Hood Theory for SVM<a class="anchor-link" href="#Add-Under-The-Hood-Theory-for-SVM">&#182;</a></h1>
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>

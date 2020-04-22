@@ -13108,12 +13108,12 @@ all dimensions. Many features are almost constant, while others are highly corre
 <p><strong>Explaining beyond this more clearly requires more reading of this topic.</strong></p>
 <p><strong>i hope the images help a bit.</strong></p>
 <p>we took a dataset and found that this can be squashed into a hyperplane with no change in interpretation of data.</p>
-<p><img src="img/projection1.png" alt="Projection1"></p>
+<p><img src="img/projection1.PNG" alt="Projection1"></p>
 <p>Projected Dataset Plot</p>
-<p><img src="img/projection2.png" alt="Projection2"></p>
+<p><img src="img/projection2.PNG" alt="Projection2"></p>
 <p>However this doesnt always work as we see in this following example</p>
-<p><img src="img/projection3.png" alt="Projection3"></p>
-<p><img src="img/projection4.png" alt="Projection4"></p>
+<p><img src="img/projection3.PNG" alt="Projection3"></p>
+<p><img src="img/projection4.PNG" alt="Projection4"></p>
 
 </div>
 </div>
@@ -13150,7 +13150,7 @@ dimensionality reduction algorithms can fight it, especially when the manifold
 assumption holds. The rest of this chapter will go through some of the most popular
 algorithms."</strong></p>
 <p><strong><em>See Figure for a better idea</em></strong></p>
-<p><img src="img/mani1.png" alt="manifold"></p>
+<p><img src="img/mani1.PNG" alt="manifold"></p>
 <p><strong><em>As of now even I have hard time understanding this and further reading on this will help in getting a more clearer ides</em></strong></p>
 
 </div>
@@ -13161,7 +13161,254 @@ algorithms."</strong></p>
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="PCA---Principal-Component-Analysis">PCA - Principal Component Analysis<a class="anchor-link" href="#PCA---Principal-Component-Analysis">&#182;</a></h2><p>First it identifies the hyperplane that lies closest to the data, and then
 it projects the data onto it.</p>
-<h1 id="Incomplete">Incomplete<a class="anchor-link" href="#Incomplete">&#182;</a></h1>
+<h3 id="Preserving-Variance">Preserving Variance<a class="anchor-link" href="#Preserving-Variance">&#182;</a></h3><p>Before you can project the training set onto a lower-dimensional hyperplane, you
+first need to choose the right hyperplane. For example, a simple 2D dataset is repre‐
+sented on the left of Figure 8-7, along with three different axes (i.e., one-dimensional
+hyperplanes). On the right is the result of the projection of the dataset onto each of
+these axes. As you can see, the projection onto the solid line preserves the maximum
+variance, while the projection onto the dotted line preserves very little variance, and
+the projection onto the dashed line preserves an intermediate amount of variance.</p>
+<p>It seems reasonable to select the axis that preserves the maximum amount of var‐
+iance, as it will most likely lose less information than the other projections. Another
+way to justify this choice is that it is the axis that minimizes the mean squared dis‐
+tance between the original dataset and its projection onto that axis. This is the rather
+simple idea behind PCA.</p>
+<p><img src="img/pca1.PNG" alt=""></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Principal-Components">Principal Components<a class="anchor-link" href="#Principal-Components">&#182;</a></h2><p>PCA identifies the axis that accounts for the largest amount of variance in the train‐
+ing set. In Figure 8-7, it is the solid line. It also finds a second axis, orthogonal to the
+first one, that accounts for the largest amount of remaining variance. In this 2D
+example there is no choice: it is the dotted line. If it were a higher-dimensional data‐
+set, PCA would also find a third axis, orthogonal to both previous axes, and a fourth,
+a fifth, and so on—as many axes as the number of dimensions in the dataset.</p>
+<blockquote><p>The direction of the principal components is not stable: if you per‐
+turb the training set slightly and run PCA again, some of the new
+PCs may point in the opposite direction of the original PCs. How‐
+ever, they will generally still lie on the same axes. In some cases, a
+pair of PCs may even rotate or swap, but the plane they define will
+generally remain the same.</p>
+</blockquote>
+<p>So how can you find the principal components of a training set? Luckily, there is a
+standard matrix factorization technique called Singular Value Decomposition (SVD)
+that can decompose the training set matrix X into the matrix multiplication of three
+matrices</p>
+<p>$U.Σ.V^T$</p>
+<div class="highlight"><pre><span></span><span class="n">X_centered</span> <span class="o">=</span> <span class="n">X</span> <span class="o">-</span> <span class="n">X</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">U</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">Vt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">svd</span><span class="p">(</span><span class="n">X_centered</span><span class="p">)</span>
+<span class="n">c1</span> <span class="o">=</span> <span class="n">Vt</span><span class="o">.</span><span class="n">T</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="n">c2</span> <span class="o">=</span> <span class="n">Vt</span><span class="o">.</span><span class="n">T</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Projecting-Down-to-d-Dimensions">Projecting Down to d Dimensions<a class="anchor-link" href="#Projecting-Down-to-d-Dimensions">&#182;</a></h2><p>Once you have identified all the principal components, you can reduce the dimen‐
+sionality of the dataset down to d dimensions by projecting it onto the hyperplane
+defined by the first d principal components. Selecting this hyperplane ensures that the
+projection will preserve as much variance as possible.</p>
+<p>To project the training set onto the hyperplane, you can simply compute the matrix
+multiplication of the training set matrix X by the matrix Wd
+, defined as the matrix
+containing the first d principal components (i.e., the matrix composed of the first d
+columns of V)</p>
+<p>$X_{d‐proj} = X.W_d$</p>
+<blockquote><p>PCA assumes that the dataset is centered around the origin. As we
+will see, Scikit-Learn’s PCA classes take care of centering the data
+for you. However, if you implement PCA yourself (as in the pre‐
+ceding example), or if you use other libraries, don’t forget to center
+the data first.</p>
+</blockquote>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Scikit-Learn">Scikit-Learn<a class="anchor-link" href="#Scikit-Learn">&#182;</a></h3><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.decomposition</span> <span class="kn">import</span> <span class="n">PCA</span>
+<span class="n">pca</span> <span class="o">=</span> <span class="n">PCA</span><span class="p">(</span><span class="n">n_components</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">X2D</span> <span class="o">=</span> <span class="n">pca</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+</pre></div>
+<h2 id="Exaplained-Variance-Ratio">Exaplained Variance Ratio<a class="anchor-link" href="#Exaplained-Variance-Ratio">&#182;</a></h2><p>Exaplained Variance Ratio indicates
+the proportion of the dataset’s variance that lies along the axis of each principal component.</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="n">pca</span><span class="o">.</span><span class="n">explained_variance_ratio_</span>
+<span class="n">array</span><span class="p">([</span><span class="mf">0.84248607</span><span class="p">,</span> <span class="mf">0.14631839</span><span class="p">])</span>
+</pre></div>
+<p>This tells you that 84.2% of the dataset’s variance lies along the first axis, and 14.6%
+lies along the second axis. This leaves less than 1.2% for the third axis, so it is reason‐
+able to assume that it probably carries little information.</p>
+<h2 id="Choosing-the-Right-Number-of-Dimensions">Choosing the Right Number of Dimensions<a class="anchor-link" href="#Choosing-the-Right-Number-of-Dimensions">&#182;</a></h2><p>Instead of arbitrarily choosing the number of dimensions to reduce down to, it is
+generally preferable to choose the number of dimensions that add up to a sufficiently
+large portion of the variance (e.g., 95%). Unless, of course, you are reducing dimen‐
+sionality for data visualization—in that case you will generally want to reduce the
+dimensionality down to 2 or 3.</p>
+<div class="highlight"><pre><span></span><span class="n">pca</span> <span class="o">=</span> <span class="n">PCA</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mf">0.95</span><span class="p">)</span>
+<span class="n">X_reduced</span> <span class="o">=</span> <span class="n">pca</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+</pre></div>
+<p>how to find number of dimensions</p>
+<div class="highlight"><pre><span></span><span class="n">pca</span> <span class="o">=</span> <span class="n">PCA</span><span class="p">()</span>
+<span class="n">pca</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+<span class="n">cumsum</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">pca</span><span class="o">.</span><span class="n">explained_variance_ratio_</span><span class="p">)</span>
+<span class="n">d</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">cumsum</span> <span class="o">&gt;=</span> <span class="mf">0.95</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+</pre></div>
+<p><img src="img/seldim.PNG" alt=""></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="PCA-for-Compression">PCA for Compression<a class="anchor-link" href="#PCA-for-Compression">&#182;</a></h2><p>Try applying PCA to the MNIST dataset while preserving 95% of its var‐
+iance. You should find that each instance will have just over 150 features, instead of
+the original 784 features. So while most of the variance is preserved, the dataset is
+now less than 20% of its original size! This is a reasonable compression ratio, and you
+can see how this can speed up a classification algorithm (such as an SVM classifier)
+tremendously.
+It is also possible to decompress the reduced dataset back to 784 dimensions by
+applying the inverse transformation of the PCA projection. Of course this won’t give
+you back the original data, since the projection lost a bit of information (within the
+5% variance that was dropped), but it will likely be quite close to the original data.
+The mean squared distance between the original data and the reconstructed data
+(compressed and then decompressed) is called the reconstruction error.</p>
+<div class="highlight"><pre><span></span><span class="n">pca</span> <span class="o">=</span> <span class="n">PCA</span><span class="p">(</span><span class="n">n_components</span> <span class="o">=</span> <span class="mi">154</span><span class="p">)</span>
+<span class="n">X_reduced</span> <span class="o">=</span> <span class="n">pca</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+<span class="n">X_recovered</span> <span class="o">=</span> <span class="n">pca</span><span class="o">.</span><span class="n">inverse_transform</span><span class="p">(</span><span class="n">X_reduced</span><span class="p">)</span>
+</pre></div>
+<p>$X_{recovered} = X_{d‐proj}.W_d
+^T$</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Randomized-PCA">Randomized PCA<a class="anchor-link" href="#Randomized-PCA">&#182;</a></h2><p>If you set the svd_solver hyperparameter to "randomized", Scikit-Learn uses a sto‐
+chastic algorithm called Randomized PCA that quickly finds an approximation of the
+first d principal components. Its computational complexity is 
+$O(m × d^2) + O(d^3)$,
+instead of 
+$O(m × n^2) + O(n^3)$ for the full SVD approach, so it is dramatically faster
+than full SVD when d is much smaller than n:</p>
+<div class="highlight"><pre><span></span><span class="n">rnd_pca</span> <span class="o">=</span> <span class="n">PCA</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">154</span><span class="p">,</span> <span class="n">svd_solver</span><span class="o">=</span><span class="s2">&quot;randomized&quot;</span><span class="p">)</span>
+<span class="n">X_reduced</span> <span class="o">=</span> <span class="n">rnd_pca</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Incremental-PCA">Incremental PCA<a class="anchor-link" href="#Incremental-PCA">&#182;</a></h2><p>One problem with the preceding implementations of PCA is that they require the
+whole training set to fit in memory in order for the algorithm to run. Fortunately,
+Incremental PCA (IPCA) algorithms have been developed: you can split the training
+set into mini-batches and feed an IPCA algorithm one mini-batch at a time.</p>
+<p>The following code splits the MNIST dataset into 100 mini-batches (using NumPy’s
+array_split() function) and feeds them to Scikit-Learn’s IncrementalPCA class5
+ to
+reduce the dimensionality of the MNIST dataset down to 154 dimensions (just like
+before).</p>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.decomposition</span> <span class="kn">import</span> <span class="n">IncrementalPCA</span>
+<span class="n">n_batches</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">inc_pca</span> <span class="o">=</span> <span class="n">IncrementalPCA</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">154</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">X_batch</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">array_split</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">n_batches</span><span class="p">):</span>
+ <span class="n">inc_pca</span><span class="o">.</span><span class="n">partial_fit</span><span class="p">(</span><span class="n">X_batch</span><span class="p">)</span>
+<span class="n">X_reduced</span> <span class="o">=</span> <span class="n">inc_pca</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+</pre></div>
+<p>Alternatively, you can use NumPy’s memmap class, which allows you to manipulate a
+large array stored in a binary file on disk as if it were entirely in memory; the class
+loads only the data it needs in memory, when it needs it. Since the IncrementalPCA
+class uses only a small part of the array at any given time, the memory usage remains
+under control. This makes it possible to call the usual fit() method, as you can see
+in the following code:</p>
+<div class="highlight"><pre><span></span><span class="n">X_mm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">memmap</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s2">&quot;float32&quot;</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;readonly&quot;</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
+<span class="n">batch_size</span> <span class="o">=</span> <span class="n">m</span> <span class="o">//</span> <span class="n">n_batches</span>
+<span class="n">inc_pca</span> <span class="o">=</span> <span class="n">IncrementalPCA</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">154</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">)</span>
+<span class="n">inc_pca</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_mm</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Kernal-PCA">Kernal PCA<a class="anchor-link" href="#Kernal-PCA">&#182;</a></h2><p>Kernel Trick can be applied to PCA making it possible to perform complex nonlinear projections for dimensionality redution. This is called KernelPCA or KPCA.</p>
+<p>It is often good at preserving clusters of instances after projection, or
+sometimes even unrolling datasets that lie close to a twisted manifold.</p>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.decomposition</span> <span class="kn">import</span> <span class="n">KernelPCA</span>
+<span class="n">rbf_pca</span> <span class="o">=</span> <span class="n">KernelPCA</span><span class="p">(</span><span class="n">n_components</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">kernel</span><span class="o">=</span><span class="s2">&quot;rbf&quot;</span><span class="p">,</span> <span class="n">gamma</span><span class="o">=</span><span class="mf">0.04</span><span class="p">)</span>
+<span class="n">X_reduced</span> <span class="o">=</span> <span class="n">rbf_pca</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+</pre></div>
+<p><img src="img/kpca.PNG" alt=""></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Selecting-a-Kernel-and-Tuning-Hyperparameters">Selecting a Kernel and Tuning Hyperparameters<a class="anchor-link" href="#Selecting-a-Kernel-and-Tuning-Hyperparameters">&#182;</a></h2><p>As kPCA is an unsupervised learning algorithm, there is no obvious performance
+measure to help you select the best kernel and hyperparameter values. However,
+dimensionality reduction is often a preparation step for a supervised learning task
+(e.g., classification), so you can simply use grid search to select the kernel and hyper‐
+parameters that lead to the best performance on that task.</p>
+<p>For example, the following
+code creates a two-step pipeline, first reducing dimensionality to two dimensions
+using kPCA, then applying Logistic Regression for classification. Then it uses Grid
+SearchCV to find the best kernel and gamma value for kPCA in order to get the best
+classification accuracy at the end of the pipeline:</p>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">GridSearchCV</span>
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LogisticRegression</span>
+<span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="kn">import</span> <span class="n">Pipeline</span>
+
+<span class="n">clf</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">([</span>
+ <span class="p">(</span><span class="s2">&quot;kpca&quot;</span><span class="p">,</span> <span class="n">KernelPCA</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">2</span><span class="p">)),</span>
+ <span class="p">(</span><span class="s2">&quot;log_reg&quot;</span><span class="p">,</span> <span class="n">LogisticRegression</span><span class="p">())</span>
+ <span class="p">])</span>
+<span class="n">param_grid</span> <span class="o">=</span> <span class="p">[{</span>
+ <span class="s2">&quot;kpca__gamma&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.03</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span>
+ <span class="s2">&quot;kpca__kernel&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;rbf&quot;</span><span class="p">,</span> <span class="s2">&quot;sigmoid&quot;</span><span class="p">]</span>
+ <span class="p">}]</span>
+<span class="n">grid_search</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="n">param_grid</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">grid_search</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+</pre></div>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">grid_search</span><span class="o">.</span><span class="n">best_params_</span><span class="p">)</span>
+<span class="p">{</span><span class="s1">&#39;kpca__gamma&#39;</span><span class="p">:</span> <span class="mf">0.043333333333333335</span><span class="p">,</span> <span class="s1">&#39;kpca__kernel&#39;</span><span class="p">:</span> <span class="s1">&#39;rbf&#39;</span><span class="p">}</span>
+</pre></div>
+<p>Another approach, this time entirely unsupervised, is to select the kernel and hyperparameters that yield the lowest reconstruction error.</p>
+<p>You may be wondering how to perform this reconstruction. One solution is to train a
+supervised regression model, with the projected instances as the training set and the
+original instances as the targets. Scikit-Learn will do this automatically if you set
+fit_inverse_transform=True, as shown in the following code:</p>
+<div class="highlight"><pre><span></span><span class="n">rbf_pca</span> <span class="o">=</span> <span class="n">KernelPCA</span><span class="p">(</span><span class="n">n_components</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">kernel</span><span class="o">=</span><span class="s2">&quot;rbf&quot;</span><span class="p">,</span> <span class="n">gamma</span><span class="o">=</span><span class="mf">0.0433</span><span class="p">,</span>
+ <span class="n">fit_inverse_transform</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">X_reduced</span> <span class="o">=</span> <span class="n">rbf_pca</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="n">X_preimage</span> <span class="o">=</span> <span class="n">rbf_pca</span><span class="o">.</span><span class="n">inverse_transform</span><span class="p">(</span><span class="n">X_reduced</span><span class="p">)</span>
+</pre></div>
+<blockquote><p>By default, fit_inverse_transform=False and KernelPCA has no
+inverse_transform() method. This method only gets created
+when you set fit_inverse_transform=True</p>
+</blockquote>
+<p>You can then compute the reconstruction pre-image error:</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">mean_squared_error</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">X_preimage</span><span class="p">)</span>
+<span class="mf">32.786308795766132</span>
+</pre></div>
+<p>Now you can use grid search with cross-validation to find the kernel and hyperpara‐
+meters that minimize this pre-image reconstruction error.</p>
+
 </div>
 </div>
 </div>
@@ -13169,12 +13416,47 @@ it projects the data onto it.</p>
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="LLE---Locally-Linear-Embedding">LLE - Locally Linear Embedding<a class="anchor-link" href="#LLE---Locally-Linear-Embedding">&#182;</a></h2><p>It is a Manifold Learning technique that does not rely
-on projections like the previous algorithms. In a nutshell, LLE works by first measur‐
-ing how each training instance linearly relates to its closest neighbors (c.n.), and then
+on projections like the previous algorithms. In a nutshell, LLE works by first measuring how each training instance linearly relates to its closest neighbors (c.n.), and then
 looking for a low-dimensional representation of the training set where these local
 relationships are best preserved (more details shortly). This makes it particularly
 good at unrolling twisted manifolds, especially when there is not too much noise.</p>
-<h1 id="Incomplete">Incomplete<a class="anchor-link" href="#Incomplete">&#182;</a></h1>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.manifold</span> <span class="kn">import</span> <span class="n">LocallyLinearEmbedding</span>
+<span class="n">lle</span> <span class="o">=</span> <span class="n">LocallyLinearEmbedding</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">n_neighbors</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">X_reduced</span> <span class="o">=</span> <span class="n">lle</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+</pre></div>
+<p><img src="img/lle1.PNG" alt=""></p>
+<p>Equation 8-4. LLE step 1: linearly modeling local relationships</p>
+<p>$\hat{W} = argmin_W \sum_{i=1}^{m} (x^{(i)}-\sum_{j=1}^{m} w_{i,j}x^{(j)})^2$</p>
+<p>subject to $w_i, j = 0 $ if<br>
+ $x^j$ 
+ is not one of the k c.n. of 
+ $x^i$</p>
+<p>and</p>
+<p>$\sum_(j = 1)^m w_{i, j} = 1 for i = 1, 2, ⋯, m$</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Equation 8-5. LLE step 2: reducing dimensionality while preserving relationships</p>
+<p>$\hat{Z} = argmin_Z \sum_{i=1}^m ( z^{(i)} - \sum_{j=1}^m \hat{w}_{i,j} z^{(j)} )^2$</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Other-Dimensionality-Reduction-Techniques">Other Dimensionality Reduction Techniques<a class="anchor-link" href="#Other-Dimensionality-Reduction-Techniques">&#182;</a></h2><ul>
+<li>Multidimensional Scaling (MDS) reduces dimensionality while trying to preserve the distances between the instances</li>
+<li>Isomap creates a graph by connecting each instance to its nearest neighbors, then reduces dimensionality while trying to preserve the geodesic distances9 between the instances</li>
+<li>t-Distributed Stochastic Neighbor Embedding (t-SNE) reduces dimensionality while trying to keep similar instances close and dissimilar instances apart. It is mostly used for visualization, in particular to visualize clusters of instances in high-dimensional space (e.g., to visualize the MNIST images in 2D).</li>
+<li>Linear Discriminant Analysis (LDA) is actually a classification algorithm, but during training it learns the most discriminative axes between the classes, and these axes can then be used to define a hyperplane onto which to project the data. The benefit is that the projection will keep classes as far apart as possible, so LDA is a good technique to reduce dimensionality before running another classification algorithm such as an SVM classifier</li>
+</ul>
+<p><img src="img/dimred.PNG" alt=""></p>
+
 </div>
 </div>
 </div>

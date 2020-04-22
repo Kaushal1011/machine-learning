@@ -13110,8 +13110,8 @@ div#notebook {
 <p><a name="votclas"></a></p>
 <h2 id="Voting-Classifier">Voting Classifier<a class="anchor-link" href="#Voting-Classifier">&#182;</a></h2><p>If we have multiple classifiers each acheiving some accuracy and we want to create an even better classifier we use the voting classifier to predict based on predictions of our previously trained classifiers.
 I hope this image explains this in a better way.</p>
-<p><img src="img/ensemble1.png" alt="Ensemble"></p>
-<p><img src="img/ensemble2.png" alt="Ensemble"></p>
+<p><img src="img/Ensemble1.PNG" alt="Ensemble"></p>
+<p><img src="img/Ensemble2.PNG" alt="Ensemble"></p>
 
 </div>
 </div>
@@ -13192,7 +13192,7 @@ sampled several times for the same predictor.</p>
 <span class="kn">from</span> <span class="nn">sklearn.tree</span> <span class="kn">import</span> <span class="n">DecisionTreeClassifier</span>
 <span class="n">bag_clf</span> <span class="o">=</span> <span class="n">BaggingClassifier</span><span class="p">(</span>
  <span class="n">DecisionTreeClassifier</span><span class="p">(),</span> <span class="n">n_estimators</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span>
- <span class="n">max_samples</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">bootstrap</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span>
+ <span class="n">max_samples</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">bootstrap</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span>
  <span class="p">)</span>
 <span class="n">bag_clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
 <span class="n">y_pred</span> <span class="o">=</span> <span class="n">bag_clf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
@@ -13215,7 +13215,7 @@ with Decision Trees classifiers.</p>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><img src="img/Ensemble3.png" alt="Ensemble3"></p>
+<p><img src="img/Ensemble3.PNG" alt="Ensemble3"></p>
 
 </div>
 </div>
@@ -13225,6 +13225,19 @@ with Decision Trees classifiers.</p>
 <div class="text_cell_render border-box-sizing rendered_html">
 <blockquote><p>Use Out-Of-Bag Evaluation for classification for BaggingClassifier.</p>
 </blockquote>
+<h2 id="Out-Of-Bag-Evolution">Out Of Bag Evolution<a class="anchor-link" href="#Out-Of-Bag-Evolution">&#182;</a></h2><p>With bagging, some instances may be sampled several times for any given predictor,
+while others may not be sampled at all. By default a BaggingClassifier samples m
+training instances with replacement (bootstrap=True), where m is the size of the
+training set. This means that only about 63% of the training instances are sampled on
+average for each predictor.6
+ The remaining 37% of the training instances that are not
+sampled are called out-of-bag (oob) instances. Note that they are not the same 37%
+for all predictors.
+Since a predictor never sees the oob instances during training, it can be evaluated on
+these instances, without the need for a separate validation set. You can evaluate the
+ensemble itself by averaging out the oob evaluations of each predictor.</p>
+<div class="highlight"><pre><span></span><span class="n">bag_clf</span><span class="o">.</span><span class="n">oob_score_</span>
+</pre></div>
 
 </div>
 </div>
@@ -13248,10 +13261,17 @@ with Decision Trees classifiers.</p>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>This is particularly useful when you are dealing with high-dimensional inputs (such
+<p>The BaggingClassifier class supports sampling the features as well. This is con‐
+trolled by two hyperparameters: max_features and bootstrap_features. They work
+the same way as max_samples and bootstrap, but for feature sampling instead of
+instance sampling. Thus, each predictor will be trained on a random subset of the
+input features.
+This is particularly useful when you are dealing with high-dimensional inputs (such
 as images). Sampling both training instances and features is called the <strong>Random
-Patches method.</strong></p>
-<p>Keeping all training instances (i.e., bootstrap=False and max_samples=1.0) but sampling features (i.e., bootstrap_features=True and/or max_features smaller than 1.0) is called the <strong>Random Subspaces method.</strong></p>
+Patches method</strong>.
+ Keeping all training instances (i.e., bootstrap=False and max_sam
+ples=1.0) but sampling features (i.e., bootstrap_features=True and/or max_fea
+tures smaller than 1.0) is called the <strong>Random Subspaces method</strong>.</p>
 
 </div>
 </div>
@@ -13302,7 +13322,7 @@ access the result using the feature<em>importances</em> variable</p>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">rnd_clf</span> <span class="o">=</span> <span class="n">RandomForestClassifier</span><span class="p">(</span><span class="n">n_estimators</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">rnd_clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">iris</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">],</span> <span class="n">iris</span><span class="p">[</span><span class="s2">&quot;target&quot;</span><span class="p">])</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">score</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">iris</span><span class="p">[</span><span class="s2">&quot;feature_names&quot;</span><span class="p">],</span> <span class="n">rnd_clf</span><span class="o">.</span><span class="n">feature_importances_</span><span class="p">):</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="k">print</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">score</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">score</span><span class="p">)</span>
 <span class="n">sepal</span> <span class="n">length</span> <span class="p">(</span><span class="n">cm</span><span class="p">)</span> <span class="mf">0.112492250999</span>
 <span class="n">sepal</span> <span class="n">width</span> <span class="p">(</span><span class="n">cm</span><span class="p">)</span> <span class="mf">0.0231192882825</span>
 <span class="n">petal</span> <span class="n">length</span> <span class="p">(</span><span class="n">cm</span><span class="p">)</span> <span class="mf">0.441030464364</span>
@@ -13359,7 +13379,7 @@ Tree) is trained and used to make predictions on the training set. The relative 
 of misclassified training instances is then increased. A second classifier is trained
 using the updated weights and again it makes predictions on the training set, weights
 are updated, and so on.</p>
-<p><img src="img/adaboost.png" alt="AdaBoost"></p>
+<p><img src="img/AdaBoost.PNG" alt="AdaBoost"></p>
 
 </div>
 </div>
@@ -13511,7 +13531,7 @@ number of trees:</p>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
 <span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">mean_squared_error</span>
 <span class="n">X_train</span><span class="p">,</span> <span class="n">X_val</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_val</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
@@ -13531,7 +13551,7 @@ number of trees:</p>
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Best way of early stopping</p>
-<div class="highlight"><pre><span></span><span class="n">gbrt</span> <span class="o">=</span> <span class="n">GradientBoostingRegressor</span><span class="p">(</span><span class="n">max_depth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">warm_start</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><span class="n">gbrt</span> <span class="o">=</span> <span class="n">GradientBoostingRegressor</span><span class="p">(</span><span class="n">max_depth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">warm_start</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">min_val_error</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="s2">&quot;inf&quot;</span><span class="p">)</span>
 <span class="n">error_going_up</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="k">for</span> <span class="n">n_estimators</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">120</span><span class="p">):</span>
@@ -13579,13 +13599,13 @@ why don’t we train a model to perform this aggregation?</p>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><img src="img/stacking1.png" alt="Stacking1"></p>
+<p><img src="img/stacking1.PNG" alt="Stacking1"></p>
 <p>Split Training Set into 2 and train layer 1 based on subset 1</p>
-<p><img src="img/stacking2.png" alt="Stacking2"></p>
+<p><img src="img/stacking2.PNG" alt="Stacking2"></p>
 <p>Train layer 2 based on predictions by layer 1 based on subset 2</p>
-<p><img src="img/stacking3.png" alt="Stacking3"></p>
+<p><img src="img/stacking3.PNG" alt="Stacking3"></p>
 <p>Final model</p>
-<p><img src="img/stacking4.png" alt="Stacking4"></p>
+<p><img src="img/stacking4.PNG" alt="Stacking4"></p>
 
 </div>
 </div>
