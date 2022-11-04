@@ -10,6 +10,28 @@ Collaborators:
 
 - Machine Learning
 
+## Open Browser Previews
+
+### src
+
+- [Practical Introduction](bin/src/00_Practical_Introduction.html)
+- [Training Models 1](bin/src/01_Training_Models.html)
+- [Training Models 2](bin/src/02_Training_Models.html)
+- [Ensemble Methods](bin/src/03_Ensemble_Methods.html)
+- [Dimensionality Reduction](bin/src/04_Dimensionality_Reduction.html)
+
+### theory
+
+-[Introduction](bin/theory/00_Introduction.html)
+
+-[Regression](bin/theory/01_Regression.html)
+
+## How to Ml
+
+- [How to Ml](bin/X1_What2WhenML.html)
+
+---
+
 ## Information about Source (Hyperlinked to Python Notebooks;Scroll for html links)
 
 - [Practical Introduction](src/00_Practical_Introduction.ipynb) Contains basic information about approaches to make machine learning models.
@@ -53,27 +75,6 @@ Collaborators:
 - [tf_introduction](src/research/tf_introduction.ipynb) is guide to basic operations of tensorflow.
 
 - [Essental Statistics and Probability](src/stats_and_prob.ipynb) is the guide to essentials of statistics and probability required for data science and engineering.
-
----
-## Open Browser Previews
-
-### src
-
-- [Practical Introduction](bin/src/00_Practical_Introduction.html)
-- [Training Models 1](bin/src/01_Training_Models.html)
-- [Training Models 2](bin/src/02_Training_Models.html)
-- [Ensemble Methods](bin/src/03_Ensemble_Methods.html)
-- [Dimensionality Reduction](bin/src/04_Dimensionality_Reduction.html)
-
-### theory
-
--[Introduction](bin/theory/00_Introduction.html)
-
--[Regression](bin/theory/01_Regression.html)
-
-## How to Ml
-
-- [How to Ml](bin/X1_What2WhenML.html)
 
 ---
 *Please use the rendered HTML file directly from the __[bin/](bin/)__ folder if to avoid any malfunctioning.*
